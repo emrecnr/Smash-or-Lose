@@ -6,6 +6,7 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
     Rigidbody2D rb2;
+    private int scoreAmount= 1;
 
     private void Start()
     {
@@ -27,6 +28,17 @@ public class BallMovement : MonoBehaviour
         {
             Debug.Log("...");
             rb2.velocity = new Vector2(rb2.velocity.x, rb2.velocity.y / 2 + collision.collider.GetComponent<Rigidbody2D>().velocity.y / 3);
+        }
+        if (collision.gameObject.tag =="Player Wall")
+        {
+            Debug.Log("Score Computer");
+            ScoreControl.aiScore += scoreAmount;
+            
+        }
+        if(collision.gameObject.tag =="AI Wall")
+        {
+            Debug.Log("Score Player!!");
+            ScoreControl.playerScore +=scoreAmount;
         }
     }
 }
