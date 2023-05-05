@@ -13,6 +13,7 @@ public class ScoreControl : MonoBehaviour
     
 
 
+
     void Start()
     {
         playerScoreText.text = playerScore.ToString();
@@ -22,8 +23,10 @@ public class ScoreControl : MonoBehaviour
     
     void Update()
     {
+       
         playerScoreText.text = playerScore.ToString();
         aiScoreText.text = aiScore.ToString();
+        
     }
     public void AddScore(int scoreAmount)
     {
