@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isAI;
 
     private Vector2 playerMove;
+    private Vector2 touchPosition;
 
 
     private void Start()
@@ -37,10 +38,21 @@ public class PlayerMovement : MonoBehaviour
     {
         rb2.velocity = playerMove*speed;
     }
-    private void PlayerControl()
+    private void PlayerControl( )
     {
         
         playerMove = new Vector2(0,Input.GetAxisRaw("Vertical"));
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Moved)
+            {
+                touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                rb2.MovePosition(new Vector2(transform.position.x, touchPosition.y));
+            }
+            
+        }
     }
     private void AIControl()
     {

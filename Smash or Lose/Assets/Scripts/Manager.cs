@@ -2,32 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
     public  GameObject uiPanel;
     public TextMeshProUGUI countdownText;
-    public float timeLeft = 90f;
+    public TextMeshProUGUI winText;
+    private float timeLeft = 60f;
+    public Color winColor;
+    public Color loseColor;
+    
 
 
     private void FixedUpdate()
     {
-        countdownText.text = "Time Left:" + Mathf.Round(timeLeft).ToString() + "seconds";
+        countdownText.text =  Mathf.Round(timeLeft).ToString() ;
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
-        {
+        { 
+            
             uiPanel.SetActive(true);
+            
             Time.timeScale = 0f;
             if (ScoreControl.playerScore > ScoreControl.aiScore)
             {
+                uiPanel.GetComponent<Image>().color = winColor;
                 Debug.Log("Win Player!");
+                winText.text = "WON PLAYER";
+            }
+            else if (ScoreControl.playerScore < ScoreControl.aiScore) 
+            {
+                
+                uiPanel.GetComponent<Image>().color = loseColor;
+                Debug.Log("Won AÝ");
+                winText.text = "WON COMPUTER";
             }
             else
             {
-                Debug.Log("Win AI");
+                
+                Debug.Log("Draw");
+                winText.text = "DRAW";
             }
         }
     }
+
+    public void Retry()
+    {
+        Time.timeScale = 1f;
+        ScoreControl.ResetScore();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void Quit()
+    {
+        Debug.Log("Quit App");
+    }
+
 
 
 }

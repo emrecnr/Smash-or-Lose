@@ -49,7 +49,7 @@ public class BallMovement : MonoBehaviour
     }
     private void BallStartPos()
     {
-        rb2.velocity = new Vector2(Random.Range(-5,5), 0) * (initialSpeed + speedIncrease * hitCounter);
+        rb2.velocity = new Vector2(Random.Range(-5,5), 0).normalized * (initialSpeed + speedIncrease * hitCounter);
     }
     public void ResetPosition()
     {
