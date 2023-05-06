@@ -17,8 +17,8 @@ public class BallMovement : MonoBehaviour
     {
         
         rb2 = GetComponent<Rigidbody2D>();
-        
-        BallStartPos();  
+
+        BallStartPos();
 
     }
     private void FixedUpdate()
@@ -47,9 +47,11 @@ public class BallMovement : MonoBehaviour
             ResetPosition();
         }
     }
-    private void BallStartPos()
+    public void BallStartPos()
     {
-        rb2.velocity = new Vector2(Random.Range(-5,5), 0).normalized * (initialSpeed + speedIncrease * hitCounter);
+        
+        rb2.velocity = new Vector2(-1, 0) * (initialSpeed + speedIncrease * hitCounter);
+        
     }
     public void ResetPosition()
     {

@@ -18,46 +18,42 @@ public class Manager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        countdownText.text =  Mathf.Round(timeLeft).ToString() ;
-        timeLeft -= Time.deltaTime;
-        if (timeLeft < 0)
-        { 
-            
-            uiPanel.SetActive(true);
-            
-            Time.timeScale = 0f;
-            if (ScoreControl.playerScore > ScoreControl.aiScore)
+        
+            countdownText.text = Mathf.Round(timeLeft).ToString();
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0)
             {
-                uiPanel.GetComponent<Image>().color = winColor;
-                Debug.Log("Win Player!");
-                winText.text = "WON PLAYER";
+
+                uiPanel.SetActive(true);
+
+                Time.timeScale = 0f;
+                if (ScoreControl.playerScore > ScoreControl.aiScore)
+                {
+                    uiPanel.GetComponent<Image>().color = winColor;
+                    Debug.Log("Win Player!");
+                    winText.text = "WON PLAYER";
+                }
+                else if (ScoreControl.playerScore < ScoreControl.aiScore)
+                {
+
+                    uiPanel.GetComponent<Image>().color = loseColor;
+                    Debug.Log("Won AÝ");
+                    winText.text = "WON COMPUTER";
+                }
+                else
+                {
+
+                    Debug.Log("Draw");
+                    winText.text = "DRAW";
+                }
             }
-            else if (ScoreControl.playerScore < ScoreControl.aiScore) 
-            {
-                
-                uiPanel.GetComponent<Image>().color = loseColor;
-                Debug.Log("Won AÝ");
-                winText.text = "WON COMPUTER";
-            }
-            else
-            {
-                
-                Debug.Log("Draw");
-                winText.text = "DRAW";
-            }
-        }
+       
+        
     }
 
-    public void Retry()
-    {
-        Time.timeScale = 1f;
-        ScoreControl.ResetScore();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void Quit()
-    {
-        Debug.Log("Quit App");
-    }
+    
+
+   
 
 
 
